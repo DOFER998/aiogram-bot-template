@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "aiogram-bot-template"
+version = "0.0.1"
+description = "Aiogram 3.x bot template"
+authors = ["c0mrade <killmy666@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+aiogram = "^3.4.1"
+pydantic-settings = "^2.2.0"
+cachetools = "^5.3.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
