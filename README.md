@@ -16,7 +16,7 @@ API_ID=23523525
 API_HASH="23r23sss2342245421aaaeessd55asa961eb"
 ```
 
-# Before setting up a local startup
+# Before you run it locally
 
 ## You will need to install `ngrok` on your PC, as Webhook for [Telegram](https://core.telegram.org/bots/webhooks) has a number of conditions that you will need to take into account when placing the bot on your hosting provider, then you need to run `ngrok` and specify it in `WEBHOOK_URL`
 
