@@ -3,6 +3,8 @@ version: '3.8'
 services:
   telegram-bot-api:
     image: aiogram/telegram-bot-api:latest
+    restart: always
+    container_name: bot_api
     environment:
       TELEGRAM_STAT: 1
       TELEGRAM_VERBOSITY: 4
@@ -12,6 +14,15 @@ services:
       - telegram-bot-api-data:/var/lib/telegram-bot-api
     ports:
       - "8081:8081"
+  redis:
+    image: redis:latest
+    restart: always
+    container_name: bot_redis
+    volumes:
+      - redis_data:/root/redis
+    ports:
+      - "6379:6379"
 
 volumes:
   telegram-bot-api-data:
+  redis_data:

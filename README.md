@@ -14,6 +14,10 @@ RATE_LIMIT=0.7
 WEBHOOK_URL="https://exemple.com"
 API_ID=23523525
 API_HASH="23r23sss2342245421aaaeessd55asa961eb"
+REDIS_HOST="localhost"
+REDIS_PORT=0000
+REDIS_DB=0
+TELEGRAM_BOT_API_URL="http://localhost:0000"
 ```
 
 # Before setting up a local startup

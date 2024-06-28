@@ -12,6 +12,10 @@ class Settings(BaseSettings):
     webhook_url: str = None
     api_id: int = None
     api_hash: str = None
+    redis_host: str = None
+    redis_port: int = None
+    redis_db: int = None
+    telegram_bot_api_url: str = None
 
 
 settings = Settings(
