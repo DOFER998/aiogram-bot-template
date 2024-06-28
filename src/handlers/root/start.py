@@ -15,7 +15,7 @@ async def cmd_start(msg: Message):
     await msg.delete()
     await msg.answer(
         text=f'<b>Hello</b> {html.escape(msg.from_user.first_name)}👋',
-        reply_markup=inline_button_info(),
+        reply_markup=inline_button_info,
     )
 
 
@@ -23,5 +23,5 @@ async def cmd_start(msg: Message):
 async def cmd_next(call: CallbackQuery):
     await call.message.edit_text(
         text=f'<b>Hello again</b> {html.escape(call.from_user.first_name)}👋',
-        reply_markup=inline_button_info(),
+        reply_markup=inline_button_info,
     )

@@ -15,7 +15,7 @@ async def user_info(call: CallbackQuery):
         text=f'<b>ID:</b> {html.escape(call.from_user.first_name)}\n'
              f'<b>First name:</b> {call.from_user.first_name}\n'
              f'<b>Last name:</b> {call.from_user.last_name}\n'
-             f'<b>Username:</b> {call.from_user.username}\n'
+             f'<b>Username:</b> {html.escape(call.from_user.username)}\n'
              f'<b>Language:</b> {call.from_user.language_code}',
-        reply_markup=inline_button_next_root()
+        reply_markup=inline_button_next_root
     )
