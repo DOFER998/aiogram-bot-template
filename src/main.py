@@ -3,7 +3,7 @@ import logging
 from src.api import app
 from src.data import dp, bot, settings
 from src.handlers import get_handlers_router
-from src.middlewares import ThrottlingMessage, ThrottlingCallback
+from src.middlewares import ThrottlingMiddleware
 from src.misc import set_commands, remove_commands
 
 
@@ -11,8 +11,8 @@ from src.misc import set_commands, remove_commands
 async def on_startup():
     await bot.set_webhook(url=f'{settings.webhook_url}/bot/{settings.token}')
     dp.include_router(get_handlers_router())
-    dp.message.middleware(ThrottlingMessage())
-    dp.callback_query.outer_middleware(ThrottlingCallback())
+    dp.message.middleware(ThrottlingMiddleware())
+    dp.callback_query.outer_middleware(ThrottlingMiddleware())
     await set_commands(bot)
 
     logging.error('Bot started!')

@@ -7,7 +7,7 @@ services:
     container_name: bot_api
     environment:
       TELEGRAM_STAT: 1
-      TELEGRAM_VERBOSITY: 4
+      TELEGRAM_VERBOSITY: 3
       TELEGRAM_API_ID: $API_ID
       TELEGRAM_API_HASH: $API_HASH
     volumes:

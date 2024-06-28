@@ -1,6 +1,5 @@
-from .throttling import ThrottlingMessage, ThrottlingCallback
+from .throttling import ThrottlingMiddleware
 
 __all__ = [
-    'ThrottlingCallback',
-    'ThrottlingMessage',
+    'ThrottlingMiddleware',
 ]

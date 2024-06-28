@@ -7,44 +7,27 @@ from cachetools import TTLCache
 from src.data import settings
 
 
-class ThrottlingMessage(BaseMiddleware):
-
+class ThrottlingMiddleware(BaseMiddleware):
     def __init__(self, rate_limit: float = settings.rate_limit) -> None:
         self.cache: MutableMapping[int, None] = TTLCache(maxsize=10_000, ttl=rate_limit)
 
     async def __call__(
             self,
             handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
-            event: Message,
+            event: TelegramObject,
             data: Dict[str, Any],
     ) -> Optional[Any]:
-        user: Optional[User] = data.get('event_from_user', None)
+        if isinstance(event, Message):
+            user = event.from_user
+        elif isinstance(event, CallbackQuery):
+            user = event.from_user
 
         if user is not None:
             if user.id in self.cache:
-                return await event.answer(text='Wow, not so fast😲')
-
-            self.cache[user.id] = None
-
-        return await handler(event, data)
-
-
-class ThrottlingCallback(BaseMiddleware):
-
-    def __init__(self, rate_limit: float = settings.rate_limit) -> None:
-        self.cache: MutableMapping[int, None] = TTLCache(maxsize=10_000, ttl=rate_limit)
-
-    async def __call__(
-            self,
-            handler: Callable[[TelegramObject, Dict[str, Any]], Awaitable[Any]],
-            event: CallbackQuery,
-            data: Dict[str, Any],
-    ) -> Optional[Any]:
-        user: Optional[User] = data.get('event_from_user', None)
-
-        if user is not None:
-            if user.id in self.cache:
-                return await event.answer(text='Wow, not so fast😲', show_alert=True)
+                if isinstance(event, Message):
+                    return await event.answer(text='Wow, not so fast😲')
+                elif isinstance(event, CallbackQuery):
+                    return await event.answer(text='Wow, not so fast😲', show_alert=True)
 
             self.cache[user.id] = None
 
