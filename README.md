@@ -33,7 +33,3 @@ docker-compose up -d
 ```shell
 poetry run fastapi run src/main.py
 ```
-
-## Development
-
-In further development will be added database `postgresql`, as well as I will gladly accept your `pull request` with the addition, improvement or correction of the functionality of this template
