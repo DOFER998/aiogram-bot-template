@@ -20,7 +20,7 @@ REDIS_DB=0
 TELEGRAM_BOT_API_URL="http://localhost:0000"
 ```
 
-# Before setting up a local startup
+# Before you run it locally
 
 ## You will need to install `ngrok` on your PC, as Webhook for [Telegram](https://core.telegram.org/bots/webhooks) has a number of conditions that you will need to take into account when placing the bot on your hosting provider, then you need to run `ngrok` and specify it in `WEBHOOK_URL`
 
