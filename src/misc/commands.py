@@ -1,3 +1,5 @@
+from contextlib import suppress
+
 from aiogram import Bot
 from aiogram.types import BotCommand, BotCommandScopeDefault
 
@@ -5,7 +7,7 @@ from src.data import user_commands
 
 
 async def set_commands(bot: Bot):
-    try:
+    with suppress(Exception):
         await bot.set_my_commands(
             [
                 BotCommand(command=command, description=description)
@@ -13,12 +15,8 @@ async def set_commands(bot: Bot):
             ],
             scope=BotCommandScopeDefault()
         )
-    except:
-        pass
 
 
 async def remove_commands(bot: Bot):
-    try:
+    with suppress(Exception):
         await bot.delete_my_commands(scope=BotCommandScopeDefault())
-    except:
-        pass

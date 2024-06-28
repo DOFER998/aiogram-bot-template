@@ -1,3 +1,5 @@
+import html
+
 from aiogram import Router, F
 from aiogram.types import CallbackQuery
 
@@ -10,7 +12,7 @@ router.message.filter(F.chat.type == 'private')
 @router.callback_query(F.data == 'info')
 async def user_info(call: CallbackQuery):
     await call.message.edit_text(
-        text=f'<b>ID:</b> {call.from_user.id}\n'
+        text=f'<b>ID:</b> {html.escape(call.from_user.first_name)}\n'
              f'<b>First name:</b> {call.from_user.first_name}\n'
              f'<b>Last name:</b> {call.from_user.last_name}\n'
              f'<b>Username:</b> {call.from_user.username}\n'
