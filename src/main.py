@@ -7,12 +7,14 @@ from aiogram import Bot, Dispatcher
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import UpdateType, ParseMode
 from aiogram.fsm.storage.memory import MemoryStorage
+from aiogram.types import BotCommandScopeAllPrivateChats
 
 from fastapi import FastAPI
 
-from src.common import env, WEBHOOK_URL_TEMPLATE, WEBHOOK_PATH_TEMPLATE
+from src.common import env, WEBHOOK_URL_TEMPLATE, WEBHOOK_PATH_TEMPLATE, COMMON_COMMANDS
 from src.handlers import include_routers
 from src.server import SimpleRequestHandler, setup_application
+from src.utils import set_commands, delete_commands
 
 
 async def on_startup(bot: Bot, dispatcher: Dispatcher) -> None:
@@ -27,6 +29,7 @@ async def on_startup(bot: Bot, dispatcher: Dispatcher) -> None:
         ],
         drop_pending_updates=True
     )
+    await set_commands(COMMON_COMMANDS, bot, BotCommandScopeAllPrivateChats())
 
     include_routers(dispatcher)
 
@@ -36,6 +39,7 @@ async def on_startup(bot: Bot, dispatcher: Dispatcher) -> None:
 async def on_shutdown(bot: Bot, dispatcher: Dispatcher) -> None:
     await bot.delete_webhook(drop_pending_updates=True)
     await dispatcher.fsm.storage.close()
+    await delete_commands(bot, BotCommandScopeAllPrivateChats())
     await bot.session.close()
 
     logging.info('Bot shutdown 💤')
